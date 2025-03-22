@@ -68,7 +68,7 @@ namespace RandoTestbed
 
 
                 // Working base spider    
-                //Preloader.PlaceShootingSpiderWorking(sceneRoot, new Vector3(257.0f, -198.0f), new MoonGuid(12134, 23415, 34536, 455167));
+                Preloader.PlaceShootingSpiderWorking(sceneRoot, new Vector3(257.0f, -198.0f), new MoonGuid(12134, 23415, 34536, 455167));
 
 
                 //Preloader.PlaceGeneric(sceneRoot, "AcidSlug", new Vector3(175.0f, -221.5f), new MoonGuid(12134, 23415, 34536, 455167));

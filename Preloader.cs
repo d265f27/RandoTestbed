@@ -582,6 +582,25 @@ namespace RandoTestbed
             clone.gameObject.SetActive(true);
             return clone;
         }
+
+        public static Transform PlaceShootingSpiderWorking(SceneRoot sceneRoot, Vector3 position, MoonGuid moonGuid)
+        {
+            // FIXME This doesn't automatically respawn.
+            Transform clone = PlaceGeneric(sceneRoot, "ShootingSpider", position, moonGuid);
+            Vector3 originalPosition = entities["ShootingSpider"].position;
+            Vector3 differencePosition = position - originalPosition;
+            Rope rope = clone.GetComponentInChildren<Rope>();
+            ConfigurableJoint configurableJoint = rope.Links[0].GetComponent<ConfigurableJoint>();
+            configurableJoint.connectedAnchor += differencePosition;
+            PhysicalSystemManager physicalSystemManager = clone.GetComponent<PhysicalSystemManager>();
+            RigidbodyState[] m_cachedRigidbodyStates = (RigidbodyState[])typeof(PhysicalSystemManager).GetField("m_cachedRigidbodyStates", BindingFlags.NonPublic | BindingFlags.Instance).GetValue(physicalSystemManager);
+            for (int i = 0; i < m_cachedRigidbodyStates.Length; i++)
+            {
+                RigidbodyState rigidbodyState = m_cachedRigidbodyStates[i];
+                rigidbodyState.OriginalPosition += differencePosition;
+            }
+            return clone;
+        }
     }
 
 
